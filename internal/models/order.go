@@ -2,6 +2,19 @@ package models
 
 import "time"
 
+type DepthOrder struct {
+	Price   float64
+	BaseQty float64
+}
+
+type OrderBook struct {
+	id       int64
+	exchange string
+	pair     string
+	asks     []DepthOrder
+	bids     []DepthOrder
+}
+
 type HistoryOrder struct {
 	client_name           string
 	exchange_name         string

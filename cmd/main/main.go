@@ -6,7 +6,10 @@ import (
 	"net"
 	"net/http"
 	"time"
+	"tradeMetricsCollector/internal/adapters/api/order"
 	"tradeMetricsCollector/internal/config"
+	"tradeMetricsCollector/internal/repositories"
+	"tradeMetricsCollector/internal/services"
 	"tradeMetricsCollector/pkg/client/postgreSQL"
 )
 
@@ -17,7 +20,11 @@ func main() {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
 	defer db.Close()
+	r := repositories.NewOrderRepository(db)
+	s := services.NewOrderService(r)
+	h := order.NewHandler(s)
 	mux := http.NewServeMux()
+	h.Register(mux)
 	start(mux, cfg)
 }
 
