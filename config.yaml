@@ -1,0 +1,17 @@
+database:
+  host: localhost
+  port: 5432
+  name: trade_stats_db
+  user: postgres
+  password: your_password_here
+
+external_services:
+  exchange_api_key: exchange_api_key
+  another_service_api_key: your_another_service_api_key_here
+
+server:
+  network: tcp
+  address: 0.0.0.0:8080
+  idle_timeout: 30
+  read_timeout: 30
+  write_timeout: 30
